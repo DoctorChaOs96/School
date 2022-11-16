@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using School.DataAccess.Contract;
 using School.Entities;
 
 namespace School.DataAccess

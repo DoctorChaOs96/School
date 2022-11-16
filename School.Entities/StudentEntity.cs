@@ -1,4 +1,6 @@
-﻿namespace School.Entities
+﻿using School.DataAccess.Contract;
+
+namespace School.Entities
 {
     public class StudentEntity: BaseEntity, IEntity
     {
