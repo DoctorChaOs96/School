@@ -2,7 +2,7 @@
 
 namespace School.Entities
 {
-    public class SchoolEntity : BaseEntity, IEntity
+    public class SchoolEntity : BaseEntity
     {
         public int Number { get; set; }
     }
