@@ -1,9 +1,7 @@
 ﻿namespace School.Entities
 {
-    public class ScoreEntity : IEntity
+    public class ScoreEntity : BaseEntity, IEntity
     {
-        public int Id { get; set; }
-
         public int Value { get; set; }
 
         public int StudentId { get; set; }
