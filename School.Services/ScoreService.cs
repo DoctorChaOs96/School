@@ -115,7 +115,7 @@ namespace School.Services
         {
             if (!scores.Any()) return;
 
-            _console.WriteLine($"{_subjects.Get(scores[0].SubjectId).Name}: {string.Join(",", scores.Select(scr => scr.Value))}");
+            _console.WriteLine($"{_subjects.Get(scores[0].SubjectId).Name}: {string.Join(", ", scores.OrderBy(scr => scr.CreatedDate).Select(scr => scr.Value))}");
         }
     }
 }
