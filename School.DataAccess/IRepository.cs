@@ -1,7 +1,7 @@
 ﻿
 namespace School.DataAccess
 {
-    internal interface IRepository<TEntity>
+    public interface IRepository<TEntity>
     {
         IList<TEntity> GetAll();
 

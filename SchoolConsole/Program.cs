@@ -1,4 +1,7 @@
-﻿using School.Services;
+﻿using School.DataAccess;
+using School.Entities;
+using School.Services;
+using School.Services.Console;
 
 namespace SchoolConsole
 {
@@ -10,7 +13,13 @@ namespace SchoolConsole
 
             initializer.Initialize();
 
-            var service = new ScoreService();
+            var students = new Repository<StudentEntity>();
+            var scores = new Repository<ScoreEntity>();
+            var schools = new Repository<SchoolEntity>();
+            var subjects = new Repository<SubjectEntity>();
+            var console = new ConsoleWrapper();
+
+            var service = new ScoreService(students, scores, schools, subjects, console);
 
             service.AddScore();
 

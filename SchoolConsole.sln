@@ -5,11 +5,13 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolConsole", "SchoolConsole\SchoolConsole.csproj", "{324E2739-2C1C-439F-9BD7-A1A1FCF64466}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Entities", "School.Entities\School.Entities.csproj", "{288BAD41-A496-4008-B2DC-8504F7CE173B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Entities", "School.Entities\School.Entities.csproj", "{288BAD41-A496-4008-B2DC-8504F7CE173B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.DataAccess", "School.DataAccess\School.DataAccess.csproj", "{41854896-F31E-4843-BF5A-173E9B40739D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.DataAccess", "School.DataAccess\School.DataAccess.csproj", "{41854896-F31E-4843-BF5A-173E9B40739D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Services", "School.Services\School.Services.csproj", "{414C54CD-FB09-49A7-AFD7-C9A8D39E7C98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Services", "School.Services\School.Services.csproj", "{414C54CD-FB09-49A7-AFD7-C9A8D39E7C98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Services.Test", "School.Services.Test\School.Services.Test.csproj", "{91F3778E-F071-4D7F-9137-A024EAFBEE12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{414C54CD-FB09-49A7-AFD7-C9A8D39E7C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{414C54CD-FB09-49A7-AFD7-C9A8D39E7C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{414C54CD-FB09-49A7-AFD7-C9A8D39E7C98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91F3778E-F071-4D7F-9137-A024EAFBEE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F3778E-F071-4D7F-9137-A024EAFBEE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F3778E-F071-4D7F-9137-A024EAFBEE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F3778E-F071-4D7F-9137-A024EAFBEE12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
