@@ -3,9 +3,9 @@ namespace School.DataAccess
 {
     public interface IRepository<TEntity>
     {
-        IList<TEntity> GetAll();
+        IQueryable<TEntity> GetAll();
 
-        TEntity Get(int id);
+        TEntity? Get(int id);
 
         void Delete(int id);
 

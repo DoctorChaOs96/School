@@ -6,31 +6,32 @@ namespace School.Services
 {
     public class ScoreService
     {
-        private readonly IRepository<StudentEntity> _students;
-        private readonly IRepository<ScoreEntity> _scores;
-        private readonly IRepository<SchoolEntity> _schools;
-        private readonly IRepository<SubjectEntity> _subjects;
+        private readonly IRepository<ScoreEntity> _scoreRepository;
+        private readonly IRepository<SubjectEntity> _subjectRepository;
         private readonly IConsole _console;
 
-        public ScoreService(IRepository<StudentEntity> students,
-            IRepository<ScoreEntity> scores,
-            IRepository<SchoolEntity> schools,
-            IRepository<SubjectEntity> subjects,
+        private readonly List<SchoolEntity> _schools;
+
+        private SchoolEntity _school;
+        private StudentEntity _student;
+
+        public ScoreService(SchoolRepository schoolRepository,
+            IRepository<ScoreEntity> scoreRepository,
+            IRepository<SubjectEntity> subjectRepository,
             IConsole console)
         {
-            _students = students;
-            _scores = scores;
-            _schools = schools;
-            _subjects = subjects;
+            _scoreRepository = scoreRepository;
+            _subjectRepository = subjectRepository;
+            _schools = schoolRepository.GetAllWithStudents().ToList();
             _console = console;
         }
 
         public void AddScore()
         {
-            var school = ChooseSchool();
+            ChooseSchool();
             _console.Clear();
 
-            var student = ChooseStudent(school);
+            ChooseStudent();
             _console.Clear();
 
             var subject = ChooseSubject();
@@ -40,7 +41,7 @@ namespace School.Services
 
             var scoreEnity = new ScoreEntity
             {
-                StudentId = student.Id,
+                StudentId = _student.Id,
                 SubjectId = subject.Id,
                 Value = int.Parse(_console.ReadLine())
             };
@@ -50,15 +51,15 @@ namespace School.Services
                 throw new Exception("Wrong score value!");
             }
 
-            _scores.Insert(scoreEnity);
+            _scoreRepository.Insert(scoreEnity);
             _console.Clear();
 
-            PrintScores(student);
+            PrintScores(_student);
         }
 
         public void PrintScores(StudentEntity student)
         {
-            var scores = _scores.GetAll().Where(score => score.StudentId == student.Id).ToList();
+            var scores = _scoreRepository.GetAll().Where(score => score.StudentId == student.Id).ToList();
 
             _console.WriteLine($"{student.FirstName} {student.LastName} scores:");
 
@@ -69,53 +70,46 @@ namespace School.Services
         {
             _console.WriteLine("Choose subject id:");
 
-            foreach (var subject in _subjects.GetAll())
+            foreach (var subject in _subjectRepository.GetAll())
             {
                 _console.WriteLine($"Id: {subject.Id}, Name: {subject.Name}");
             }
 
-            return _subjects.Get(int.Parse(_console.ReadLine()));
+            return _subjectRepository.Get(int.Parse(_console.ReadLine()));
         }
 
-        private SchoolEntity ChooseSchool()
+        private void ChooseSchool()
         {
             _console.WriteLine("Choose school id:");
 
-            foreach (var school in _schools.GetAll())
+            foreach (var school in _schools)
             {
                 _console.WriteLine($"Id: {school.Id}, Number: {school.Number}");
             }
 
-            return _schools.Get(int.Parse(_console.ReadLine()));
+            _school = _schools.First(s => s.Id == int.Parse(_console.ReadLine()));
         }
 
 
-        private StudentEntity ChooseStudent(SchoolEntity school)
+        private void ChooseStudent()
         {
             _console.WriteLine("Choose schoolStudent id:");
 
-            foreach (var schoolStudent in _students.GetAll().Where(stdnt => stdnt.SchoolId == school.Id))
+            foreach (var schoolStudent in _school.Students)
             {
                 _console.WriteLine($"StudentId: {schoolStudent.Id}, Full Name: {schoolStudent.FirstName} {schoolStudent.LastName}");
             }
 
-            var student = _students.Get(int.Parse(_console.ReadLine()));
-
-            if (student.SchoolId != school.Id)
-            {
-                throw new Exception("Student from external school was choosen!");
-            }
+            _student = _school.Students.First(s => s.Id == int.Parse(_console.ReadLine()));
 
             _console.Clear();
-
-            return student;
         }
 
         private void PrintGroup(ScoreEntity[] scores)
         {
             if (!scores.Any()) return;
 
-            _console.WriteLine($"{_subjects.Get(scores[0].SubjectId).Name}: {string.Join(", ", scores.OrderBy(scr => scr.CreatedDate).Select(scr => scr.Value))}");
+            _console.WriteLine($"{_subjectRepository.Get(scores[0].SubjectId).Name}: {string.Join(", ", scores.OrderBy(scr => scr.CreatedDate).Select(scr => scr.Value))}");
         }
     }
 }

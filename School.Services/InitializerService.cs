@@ -13,10 +13,12 @@ namespace School.Services
 
         public InitializerService()
         {
-            _students = new Repository<StudentEntity>();
-            _scores = new Repository<ScoreEntity>();
-            _schools = new Repository<SchoolEntity>();
-            _subjects = new Repository<SubjectEntity>();
+            var dbContext = new SchoolDbContext();
+
+            _students = new Repository<StudentEntity>(dbContext);
+            _scores = new Repository<ScoreEntity>(dbContext);
+            _schools = new Repository<SchoolEntity>(dbContext);
+            _subjects = new Repository<SubjectEntity>(dbContext);
         }
 
         public void Initialize()

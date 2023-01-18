@@ -1,4 +1,4 @@
-﻿namespace School.DataAccess.Contract
+﻿namespace School.Entities.Contract
 {
     public class BaseEntity : IEntity
     {

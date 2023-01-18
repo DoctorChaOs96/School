@@ -13,13 +13,14 @@ namespace SchoolConsole
 
             initializer.Initialize();
 
-            var students = new Repository<StudentEntity>();
-            var scores = new Repository<ScoreEntity>();
-            var schools = new Repository<SchoolEntity>();
-            var subjects = new Repository<SubjectEntity>();
+            var dbContext = new SchoolDbContext();
+            var scores = new Repository<ScoreEntity>(dbContext);
+            var schools = new SchoolRepository(dbContext);
+            var subjects = new Repository<SubjectEntity>(dbContext);
+
             var console = new ConsoleWrapper();
 
-            var service = new ScoreService(students, scores, schools, subjects, console);
+            var service = new ScoreService(schools, scores, subjects, console);
 
             service.AddScore();
 

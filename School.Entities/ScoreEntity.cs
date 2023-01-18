@@ -1,4 +1,4 @@
-﻿using School.DataAccess.Contract;
+﻿using School.Entities.Contract;
 
 namespace School.Entities
 {
@@ -8,6 +8,10 @@ namespace School.Entities
 
         public int StudentId { get; set; }
 
+        public StudentEntity Student { get; set; }
+
         public int SubjectId { get; set; }
+
+        public SubjectEntity Subject { get; set; }
     }
 }
